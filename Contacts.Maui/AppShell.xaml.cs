@@ -1,10 +1,15 @@
-﻿namespace Contacts.Maui
+﻿using Contacts.Maui.Views;
+
+namespace Contacts.Maui;
+
+public partial class AppShell : Shell
 {
-	public partial class AppShell : Shell
+	public AppShell()
 	{
-		public AppShell()
-		{
-			InitializeComponent();
-		}
+		InitializeComponent();
+
+		Routing.RegisterRoute(nameof(ContactsPage), typeof(ContactsPage));
+		Routing.RegisterRoute(nameof(EditContactPage), typeof(EditContactPage));
+		Routing.RegisterRoute(nameof(AddContactPage), typeof(AddContactPage));
 	}
 }
