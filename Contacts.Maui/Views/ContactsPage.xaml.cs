@@ -1,3 +1,5 @@
+using Contacts.Maui.Models;
+using Contact = Contacts.Maui.Models.Contact;
 namespace Contacts.Maui.Views;
 
 public partial class ContactsPage : ContentPage
@@ -6,19 +8,21 @@ public partial class ContactsPage : ContentPage
 	{
 		InitializeComponent();
 
-		List<Contact> contacts = [
-			new Contact {Name = "John Doe", Email = "JohnDoe@gmail.com"},
-			new Contact {Name = "Jane Doe", Email = "JaneDoe@gmail.com"},
-			new Contact {Name = "Tom Hanks", Email = "TomHanks@gmail.com"},
-			new Contact {Name = "Frank Liu", Email = "FrankLiu@gmail.com"},
-			];
+		List<Contact> contacts = ContactRepository.GetContacts();
 
 		listContacts.ItemsSource = contacts;
 	}
 
-	public class Contact
+	private async void ListContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 	{
-		public string? Name { get; set; }
-		public string? Email { get; set; }
+		if (listContacts.SelectedItem is not null)
+		{
+			await Shell.Current.GoToAsync(nameof(EditContactPage));
+		}
+	}
+
+	private void ListContacts_ItemTapped(object sender, ItemTappedEventArgs e)
+	{
+		listContacts.SelectedItem = null;
 	}
 }

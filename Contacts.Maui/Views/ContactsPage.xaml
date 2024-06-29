@@ -8,7 +8,9 @@
         x:Name="listContacts"
         Background="Transparent"
         SeparatorColor="Silver"
-        RowHeight="60">
+        RowHeight="60"
+        ItemSelected="ListContacts_ItemSelected"
+        ItemTapped="ListContacts_ItemTapped">
 
         <ListView.ItemTemplate>
             <DataTemplate>
