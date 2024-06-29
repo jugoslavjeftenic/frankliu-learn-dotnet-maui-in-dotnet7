@@ -4,14 +4,17 @@
              x:Class="Contacts.Maui.Views.EditContactPage"
              Title="Edit Contact">
     <VerticalStackLayout Spacing="5">
-        <Label 
+
+        <Label
+            x:Name="LblName"
             Text="Edit Contact"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
         <Button
-            x:Name="btnCancel"
+            x:Name="BtnCancel"
             Text="Cancel"
-            Clicked="btnCancel_Clicked"/>
+            Clicked="BtnCancel_Clicked"/>
+
     </VerticalStackLayout>
 </ContentPage>
