@@ -31,6 +31,21 @@ public partial class EditContactPage : ContentPage
 
 	private void UpdateBtn_Clicked(object sender, EventArgs e)
 	{
+		if (NameValidator.IsNotValid)
+		{
+			DisplayAlert("Error", "Name is required.", "Ok");
+			return;
+		}
+
+		if (EmailValidator.IsNotValid)
+		{
+			foreach (var error in EmailValidator.Errors!)
+			{
+				DisplayAlert("Error", error?.ToString(), "Ok");
+			}
+			return;
+		}
+
 		if (_contact is not null)
 		{
 			_contact.Name = EntryName.Text;
