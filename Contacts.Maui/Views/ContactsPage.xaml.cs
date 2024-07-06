@@ -1,6 +1,7 @@
 using Contacts.Maui.Models;
 using System.Collections.ObjectModel;
 using Contact = Contacts.Maui.Models.Contact;
+
 namespace Contacts.Maui.Views;
 
 public partial class ContactsPage : ContentPage
@@ -14,7 +15,7 @@ public partial class ContactsPage : ContentPage
 	{
 		base.OnAppearing();
 
-		var contacts = new ObservableCollection<Contact> (ContactRepository.GetContacts());
+		var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
 		listContacts.ItemsSource = contacts;
 	}
 
@@ -30,5 +31,10 @@ public partial class ContactsPage : ContentPage
 	private void ListContacts_ItemTapped(object sender, ItemTappedEventArgs e)
 	{
 		listContacts.SelectedItem = null;
+	}
+
+	private void AddContactBtn_Clicked(object sender, EventArgs e)
+	{
+		Shell.Current.GoToAsync(nameof(AddContactPage));
 	}
 }
