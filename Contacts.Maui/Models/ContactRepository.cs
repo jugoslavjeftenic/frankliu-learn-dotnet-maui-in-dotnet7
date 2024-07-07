@@ -13,7 +13,7 @@ public static class ContactRepository
 
 	public static Contact? GetContactById(int contactId)
 	{
-		var contact = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+		var contact = _contacts.FirstOrDefault(x => x.ContactId.Equals(contactId));
 		if (contact is not null)
 		{
 			return new Contact()
@@ -33,7 +33,7 @@ public static class ContactRepository
 	{
 		if (contactId != contact.ContactId) return;
 
-		var contactToUpdate = _contacts.FirstOrDefault(x => x.ContactId == contactId);
+		var contactToUpdate = _contacts.FirstOrDefault(x => x.ContactId.Equals(contactId));
 		if (contactToUpdate is not null)
 		{
 			contactToUpdate.Name = contact.Name;
@@ -48,5 +48,14 @@ public static class ContactRepository
 		var maxId = _contacts.Max(x => x.ContactId);
 		contact.ContactId = maxId + 1;
 		_contacts.Add(contact);
+	}
+
+	public static void DeleteContact(int contactId)
+	{
+		var contact = _contacts.FirstOrDefault(x => x.ContactId.Equals(contactId));
+		if (contact is not null)
+		{
+			_contacts.Remove(contact);
+		}
 	}
 }
