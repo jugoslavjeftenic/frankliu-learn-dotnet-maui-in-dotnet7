@@ -1,4 +1,6 @@
-﻿namespace Contacts.Maui.Models;
+﻿using System.Linq;
+
+namespace Contacts.Maui.Models;
 
 public static class ContactRepository
 {
@@ -45,7 +47,7 @@ public static class ContactRepository
 
 	public static void AddContact(Contact contact)
 	{
-		var maxId = _contacts.Max(x => x.ContactId);
+		var maxId = _contacts.Select(x => x.ContactId).DefaultIfEmpty(0).Max();
 		contact.ContactId = maxId + 1;
 		_contacts.Add(contact);
 	}
