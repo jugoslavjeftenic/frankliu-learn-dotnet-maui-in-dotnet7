@@ -15,8 +15,7 @@ public partial class ContactsPage : ContentPage
 	{
 		base.OnAppearing();
 
-		var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
-		listContacts.ItemsSource = contacts;
+		LoadContacts();
 	}
 
 	private async void ListContacts_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -36,5 +35,23 @@ public partial class ContactsPage : ContentPage
 	private void AddContactBtn_Clicked(object sender, EventArgs e)
 	{
 		Shell.Current.GoToAsync(nameof(AddContactPage));
+	}
+
+	private void DeleteMenuItem_Clicked(object sender, EventArgs e)
+	{
+		var menuItem = sender as MenuItem;
+		var contact = menuItem?.CommandParameter as Contact;
+
+		if (contact is not null)
+		{
+			ContactRepository.DeleteContact(contact.ContactId);
+			LoadContacts();
+		}
+	}
+
+	private void LoadContacts()
+	{
+		var contacts = new ObservableCollection<Contact>(ContactRepository.GetContacts());
+		listContacts.ItemsSource = contacts;
 	}
 }
