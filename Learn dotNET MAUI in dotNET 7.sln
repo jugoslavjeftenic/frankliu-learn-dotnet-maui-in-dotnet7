@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contacts.Maui", "Contacts.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.CoreBusiness", "Contacts.CoreBusiness\Contacts.CoreBusiness.csproj", "{E477EDB6-DEA1-49DE-9AA9-C067ADBA9D3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.UseCases", "Contacts.UseCases\Contacts.UseCases.csproj", "{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{E477EDB6-DEA1-49DE-9AA9-C067ADBA9D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E477EDB6-DEA1-49DE-9AA9-C067ADBA9D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E477EDB6-DEA1-49DE-9AA9-C067ADBA9D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
