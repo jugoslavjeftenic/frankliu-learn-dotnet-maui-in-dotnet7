@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Contacts.Maui.Models;
+﻿namespace Contacts.Maui.Models;
 
 public static class ContactRepository
 {
@@ -59,5 +57,35 @@ public static class ContactRepository
 		{
 			_contacts.Remove(contact);
 		}
+	}
+
+	public static List<Contact> SearchContacts(string filterText)
+	{
+		var contacts = _contacts
+			.Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Name.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))
+			.ToList();
+
+		if (contacts is null || contacts.Count < 1)
+		{
+			contacts = _contacts
+				.Where(x => !string.IsNullOrWhiteSpace(x.Email) && x.Email.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))
+				.ToList();
+		}
+
+		if (contacts is null || contacts.Count < 1)
+		{
+			contacts = _contacts
+				.Where(x => !string.IsNullOrWhiteSpace(x.Phone) && x.Phone.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))
+				.ToList();
+		}
+
+		if (contacts is null || contacts.Count < 1)
+		{
+			contacts = _contacts
+				.Where(x => !string.IsNullOrWhiteSpace(x.Address) && x.Address.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))
+				.ToList();
+		}
+
+		return contacts;
 	}
 }
