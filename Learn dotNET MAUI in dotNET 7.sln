@@ -5,9 +5,13 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contacts.Maui", "Contacts.Maui\Contacts.Maui.csproj", "{C6AB03AB-FC99-43D4-96BD-4839BC457AAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.CoreBusiness", "Contacts.CoreBusiness\Contacts.CoreBusiness.csproj", "{E477EDB6-DEA1-49DE-9AA9-C067ADBA9D3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contacts.CoreBusiness", "Contacts.CoreBusiness\Contacts.CoreBusiness.csproj", "{E477EDB6-DEA1-49DE-9AA9-C067ADBA9D3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.UseCases", "Contacts.UseCases\Contacts.UseCases.csproj", "{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contacts.UseCases", "Contacts.UseCases\Contacts.UseCases.csproj", "{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Plugins", "Plugins", "{6101FF04-FBCE-41B7-A1C9-5A8BA265CA92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts.Plugins.DataStore.InMemory", "Plugins\Contacts.Plugins.DataStore.InMemory\Contacts.Plugins.DataStore.InMemory.csproj", "{C5E86DEE-673C-4DC7-BFD6-7F1AE31B3B81}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,9 +33,16 @@ Global
 		{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E76894D6-C5D0-4B72-9AF7-9CBF7A6CC9C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5E86DEE-673C-4DC7-BFD6-7F1AE31B3B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5E86DEE-673C-4DC7-BFD6-7F1AE31B3B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5E86DEE-673C-4DC7-BFD6-7F1AE31B3B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5E86DEE-673C-4DC7-BFD6-7F1AE31B3B81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C5E86DEE-673C-4DC7-BFD6-7F1AE31B3B81} = {6101FF04-FBCE-41B7-A1C9-5A8BA265CA92}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {91D5F30D-0116-4858-A07F-DE71F5CD3928}
