@@ -14,6 +14,11 @@ public class ContactInMemoryRepository : IContactRepository
 
 	public Task<List<Contact>> GetContactsAsync(string filterText)
 	{
+		if (string.IsNullOrWhiteSpace(filterText))
+		{
+			return Task.FromResult(_contacts);
+		}
+
 		var contacts = _contacts
 			.Where(x => string.IsNullOrWhiteSpace(x.Name) is false &&
 						x.Name.StartsWith(filterText, StringComparison.OrdinalIgnoreCase))
