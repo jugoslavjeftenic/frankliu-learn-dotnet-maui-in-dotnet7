@@ -12,6 +12,24 @@ public class ContactInMemoryRepository : IContactRepository
 		new Contact { ContactId = 4, Name = "Frank Liu", Email = "FrankLiu@gmail.com" },
 	];
 
+	public Task<Contact> GetContactByIdAsync(int contactId)
+	{
+		var contact = _contacts.FirstOrDefault(x => x.ContactId.Equals(contactId));
+		if (contact is not null)
+		{
+			return Task.FromResult(new Contact()
+			{
+				ContactId = contactId,
+				Name = contact.Name,
+				Email = contact.Email,
+				Phone = contact.Phone,
+				Address = contact.Address
+			});
+		}
+
+		return Task.FromResult(new Contact());
+	}
+
 	public Task<List<Contact>> GetContactsAsync(string filterText)
 	{
 		if (string.IsNullOrWhiteSpace(filterText))
