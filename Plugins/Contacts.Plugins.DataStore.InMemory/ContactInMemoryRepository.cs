@@ -80,4 +80,20 @@ public class ContactInMemoryRepository : IContactRepository
 
 		return Task.FromResult(contacts);
 	}
+
+	public Task UpdateContactAsync(int contactId, Contact contact)
+	{
+		if (contactId.Equals(contact.ContactId) is false) return Task.CompletedTask;
+
+		var contactToUpdate = _contacts.FirstOrDefault(x => x.ContactId.Equals(contactId));
+		if (contactToUpdate is not null)
+		{
+			contactToUpdate.Name = contact.Name;
+			contactToUpdate.Email = contact.Email;
+			contactToUpdate.Phone = contact.Phone;
+			contactToUpdate.Address = contact.Address;
+		}
+
+		return Task.CompletedTask;
+	}
 }
