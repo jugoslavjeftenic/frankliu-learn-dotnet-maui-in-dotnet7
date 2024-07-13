@@ -12,6 +12,15 @@ public class ContactInMemoryRepository : IContactRepository
 		new Contact { ContactId = 4, Name = "Frank Liu", Email = "FrankLiu@gmail.com" },
 	];
 
+	public Task AddContactAsync(Contact contact)
+	{
+		var maxId = _contacts.Select(x => x.ContactId).DefaultIfEmpty(0).Max();
+		contact.ContactId = maxId + 1;
+		_contacts.Add(contact);
+
+		return Task.CompletedTask;
+	}
+
 	public Task<Contact> GetContactByIdAsync(int contactId)
 	{
 		var contact = _contacts.FirstOrDefault(x => x.ContactId.Equals(contactId));
