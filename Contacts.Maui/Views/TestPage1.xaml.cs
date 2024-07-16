@@ -4,7 +4,7 @@ namespace Contacts.Maui.Views;
 
 public partial class TestPage1 : ContentPage
 {
-	private ContactViewModel _viewModel;
+	private readonly ContactViewModel _viewModel;
 
 	public TestPage1()
 	{
@@ -12,5 +12,12 @@ public partial class TestPage1 : ContentPage
 
 		_viewModel = new ContactViewModel();
 		this.BindingContext = _viewModel;
+	}
+
+	protected override void OnAppearing()
+	{
+		base.OnAppearing();
+
+		_viewModel.LoadContact(1);
 	}
 }

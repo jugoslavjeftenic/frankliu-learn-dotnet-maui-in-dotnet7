@@ -7,16 +7,32 @@ namespace Contacts.Maui.ViewModels;
 
 public partial class ContactViewModel : ObservableObject
 {
-	public Contact Contact { get; set; }
+	private Contact? _contact;
+	public Contact? Contact
+	{
+		get => _contact;
+		set
+		{
+			SetProperty(ref _contact, value);
+		}
+	}
 
 	public ContactViewModel()
 	{
-		this.Contact = ContactRepository.GetContactById(1)!;
+		this.Contact = new Contact();
+	}
+
+	public void LoadContact(int contactId)
+	{
+		this.Contact = ContactRepository.GetContactById(contactId);
 	}
 
 	[RelayCommand]
 	public void SaveContact()
 	{
-		ContactRepository.UpdateContact(this.Contact.ContactId, this.Contact);
+		if (this.Contact is not null)
+		{
+			ContactRepository.UpdateContact(this.Contact.ContactId, this.Contact);
+		}
 	}
 }
