@@ -11,7 +11,7 @@ public partial class ContactsPage : ContentPage
 	private readonly IDeleteContactUseCase _deleteContactUseCase;
 
 	public ContactsPage
-		(IViewContactsUseCase viewContactsUseCase,IDeleteContactUseCase deleteContactUseCase)
+		(IViewContactsUseCase viewContactsUseCase, IDeleteContactUseCase deleteContactUseCase)
 	{
 		InitializeComponent();
 		_viewContactsUseCase = viewContactsUseCase;
@@ -68,5 +68,10 @@ public partial class ContactsPage : ContentPage
 		var contacts = new ObservableCollection<Contact>
 			(await _viewContactsUseCase.ExecuteAsync(((SearchBar)sender).Text));
 		listContacts.ItemsSource = contacts;
+	}
+
+	private void TestBtn_Clicked(object sender, EventArgs e)
+	{
+		Shell.Current.GoToAsync(nameof(TestPage1));
 	}
 }
