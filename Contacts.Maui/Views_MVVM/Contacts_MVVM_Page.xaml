@@ -26,12 +26,30 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:Contact">
                     <StackLayout>
-                        <Frame Margin="0,5">
-                            <StackLayout Orientation="Vertical" Spacing="5">
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Email}"/>
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItems>
+                                    <SwipeItem
+                                        Text="Delete"
+                                        IsDestructive="True"
+                                        BackgroundColor="Red">
+                                    </SwipeItem>
+                                    <SwipeItem
+                                        Text="Edit"
+                                        IsDestructive="False"
+                                        BackgroundColor="Green">
+                                    </SwipeItem>
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <StackLayout>
+                                <Frame Margin="0,5">
+                                    <StackLayout Orientation="Vertical" Spacing="5">
+                                        <Label Text="{Binding Name}"/>
+                                        <Label Text="{Binding Email}"/>
+                                    </StackLayout>
+                                </Frame>
                             </StackLayout>
-                        </Frame>
+                        </SwipeView>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
