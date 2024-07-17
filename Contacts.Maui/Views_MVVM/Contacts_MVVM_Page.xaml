@@ -20,6 +20,7 @@
             Placeholder="Search Contact"/>
 
         <CollectionView
+            x:Name="ContactsCollection"
             Grid.Row="1"
             Grid.Column="0"
             ItemsSource="{Binding Contacts}">
@@ -32,13 +33,14 @@
                                     <SwipeItem
                                         Text="Delete"
                                         IsDestructive="True"
-                                        BackgroundColor="Red">
-                                    </SwipeItem>
+                                        BackgroundColor="Red"
+                                        Command="{Binding Source={x:Reference ContactsCollection},
+                                            Path=BindingContext.DeleteContactCommand}"
+                                        CommandParameter="{Binding ContactId}"/>
                                     <SwipeItem
                                         Text="Edit"
                                         IsDestructive="False"
-                                        BackgroundColor="Green">
-                                    </SwipeItem>
+                                        BackgroundColor="Green"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <StackLayout>
