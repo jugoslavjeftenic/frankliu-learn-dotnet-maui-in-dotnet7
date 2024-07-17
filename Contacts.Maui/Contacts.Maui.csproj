@@ -83,10 +83,10 @@
 		<MauiXaml Update="Views\EditContactPage.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views\TestPage1.xaml">
+		<MauiXaml Update="Views_MVVM\Contacts_MVVM_Page.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-		<MauiXaml Update="Views_MVVM\Contacts_MVVM_Page.xaml">
+		<MauiXaml Update="Views_MVVM\EditContact_MVVM_Page.xaml">
 		  <Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
 	</ItemGroup>

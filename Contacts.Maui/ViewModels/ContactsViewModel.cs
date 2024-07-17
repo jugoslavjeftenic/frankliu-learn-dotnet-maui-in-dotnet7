@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Contacts.Maui.Views_MVVM;
 using Contacts.UseCases.Interfaces;
 using System.Collections.ObjectModel;
 using Contact = Contacts.CoreBusiness.Contact;
@@ -39,6 +40,13 @@ public partial class ContactsViewModel : ObservableObject
 	public async Task DeleteContact(int contactId)
 	{
 		await _deleteContactUseCase.ExecuteAsync(contactId);
+		await LoadContactsAsync();
+	}
+
+	[RelayCommand]
+	public async Task GoToEditContact(int contactId)
+	{
+		await Shell.Current.GoToAsync($"{nameof(EditContact_MVVM_Page)}?Id={contactId}");
 		await LoadContactsAsync();
 	}
 }

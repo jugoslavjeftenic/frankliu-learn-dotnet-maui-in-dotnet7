@@ -40,7 +40,10 @@
                                     <SwipeItem
                                         Text="Edit"
                                         IsDestructive="False"
-                                        BackgroundColor="Green"/>
+                                        BackgroundColor="Green"
+                                        Command="{Binding Source={x:Reference ContactsCollection},
+                                            Path=BindingContext.GoToEditContactCommand}"
+                                        CommandParameter="{Binding ContactId}"/>
                                 </SwipeItems>
                             </SwipeView.RightItems>
                             <StackLayout>

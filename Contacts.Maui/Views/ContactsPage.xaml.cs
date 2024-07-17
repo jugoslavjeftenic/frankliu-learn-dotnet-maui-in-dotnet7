@@ -69,9 +69,4 @@ public partial class ContactsPage : ContentPage
 			(await _viewContactsUseCase.ExecuteAsync(((SearchBar)sender).Text));
 		listContacts.ItemsSource = contacts;
 	}
-
-	private void TestBtn_Clicked(object sender, EventArgs e)
-	{
-		Shell.Current.GoToAsync(nameof(TestPage1));
-	}
 }
