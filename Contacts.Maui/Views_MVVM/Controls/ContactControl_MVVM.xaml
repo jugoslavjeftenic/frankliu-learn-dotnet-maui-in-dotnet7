@@ -59,11 +59,13 @@
 
         <Button
             x:Name="SaveBtn"
-            Text="Save"/>
+            Text="Save"
+            Command="{Binding EditContactCommand}"/>
 
         <Button
             x:Name="CancelBtn"
-            Text="Cancel"/>
+            Text="Cancel"
+            Command="{Binding BackToContactsCommand}"/>
 
     </StackLayout>
 </ContentView>
