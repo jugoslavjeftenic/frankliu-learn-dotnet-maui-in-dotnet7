@@ -45,6 +45,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<Contacts_MVVM_Page>();
 		builder.Services.AddSingleton<EditContact_MVVM_Page>();
+		builder.Services.AddSingleton<AddContact_MVVM_Page>();
 
 		return builder.Build();
 	}

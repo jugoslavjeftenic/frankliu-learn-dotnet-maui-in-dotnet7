@@ -49,4 +49,10 @@ public partial class ContactsViewModel : ObservableObject
 		await Shell.Current.GoToAsync($"{nameof(EditContact_MVVM_Page)}?Id={contactId}");
 		await LoadContactsAsync();
 	}
+
+	[RelayCommand]
+	public async Task GoToAddContact()
+	{
+		await Shell.Current.GoToAsync($"{nameof(AddContact_MVVM_Page)}");
+	}
 }

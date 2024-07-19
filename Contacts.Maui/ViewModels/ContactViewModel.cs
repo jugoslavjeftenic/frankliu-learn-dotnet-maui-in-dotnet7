@@ -11,6 +11,7 @@ public partial class ContactViewModel : ObservableObject
 	private Contact? _contact;
 	private readonly IViewContactUseCase _viewContactUseCase;
 	private readonly IEditContactUseCase _editContactUseCase;
+	private readonly IAddContactUseCase _addContactUseCase;
 
 	public Contact? Contact
 	{
@@ -21,12 +22,15 @@ public partial class ContactViewModel : ObservableObject
 		}
 	}
 
-	public ContactViewModel
-		(IViewContactUseCase viewContactUseCase, IEditContactUseCase editContactUseCase)
+	public ContactViewModel(
+		IViewContactUseCase viewContactUseCase,
+		IEditContactUseCase editContactUseCase,
+		IAddContactUseCase addContactUseCase)
 	{
 		this.Contact = new Contact();
 		_viewContactUseCase = viewContactUseCase;
 		_editContactUseCase = editContactUseCase;
+		_addContactUseCase = addContactUseCase;
 	}
 
 	public async Task LoadContact(int contactId)
@@ -40,6 +44,17 @@ public partial class ContactViewModel : ObservableObject
 		if (this.Contact is not null)
 		{
 			await _editContactUseCase.ExecuteAsync(this.Contact.ContactId, this.Contact);
+		}
+
+		await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
+	}
+
+	[RelayCommand]
+	public async Task AddContact()
+	{
+		if (this.Contact is not null)
+		{
+			await _addContactUseCase.ExecuteAsync(this.Contact);
 		}
 
 		await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");

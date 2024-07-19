@@ -59,11 +59,9 @@
 
         <Button
             x:Name="SaveBtn"
-            Text="Save"
-            Command="{Binding EditContactCommand}"/>
+            Text="Save"/>
 
         <Button
-            x:Name="CancelBtn"
             Text="Cancel"
             Command="{Binding BackToContactsCommand}"/>
 
