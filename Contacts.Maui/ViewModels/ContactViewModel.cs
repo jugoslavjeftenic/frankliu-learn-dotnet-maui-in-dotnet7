@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using Contacts.Maui.Views_MVVM;
 using Contacts.UseCases.Interfaces;
+using System.Text.RegularExpressions;
 using Contact = Contacts.CoreBusiness.Contact;
 
 namespace Contacts.Maui.ViewModels;
@@ -19,12 +20,15 @@ public partial class ContactViewModel : ObservableObject
 		set
 		{
 			SetProperty(ref _contact, value);
+			OnPropertyChanged(nameof(IsNameProvided));
+			OnPropertyChanged(nameof(IsEmailProvided));
+			OnPropertyChanged(nameof(IsEmailFormatValid));
 		}
 	}
 
-	public bool IsNameProvided { get; set; }
-	public bool IsEmailProvided { get; set; }
-	public bool IsEmailFormatValid { get; set; }
+	public bool IsNameProvided => string.IsNullOrEmpty(Contact?.Name) is false;
+	public bool IsEmailProvided => string.IsNullOrEmpty(Contact?.Email) is false;
+	public bool IsEmailFormatValid => Contact is not null;
 
 	public ContactViewModel(
 		IViewContactUseCase viewContactUseCase,
@@ -102,5 +106,10 @@ public partial class ContactViewModel : ObservableObject
 		}
 
 		return true;
+	}
+
+	private bool IsValidEmailFormat(string email)
+	{
+		return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 	}
 }

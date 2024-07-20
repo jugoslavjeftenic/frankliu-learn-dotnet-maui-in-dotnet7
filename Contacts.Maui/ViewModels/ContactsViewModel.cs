@@ -12,46 +12,57 @@ public partial class ContactsViewModel : ObservableObject
 	private readonly IViewContactsUseCase _viewContactsUseCase;
 	private readonly IDeleteContactUseCase _deleteContactUseCase;
 
-	public ObservableCollection<Contact> Contacts { get; set; }
+	public ObservableCollection<Contact> Contacts { get; set; } = [];
+
+	private string? _filterText;
+
+	public string? FilterText
+	{
+		get => _filterText;
+		set
+		{
+			SetProperty(ref _filterText, value);
+			LoadContactsAsync(_filterText).ConfigureAwait(true);
+		}
+	}
 
 	public ContactsViewModel
 		(IViewContactsUseCase viewContactsUseCase, IDeleteContactUseCase deleteContactUseCase)
 	{
 		_viewContactsUseCase = viewContactsUseCase;
 		_deleteContactUseCase = deleteContactUseCase;
-		this.Contacts = [];
 	}
 
-	public async Task LoadContactsAsync()
+	public async Task LoadContactsAsync(string? filterText = null)
 	{
-		this.Contacts?.Clear();
+		Contacts?.Clear();
 
-		var contacts = await _viewContactsUseCase.ExecuteAsync(string.Empty);
+		var contacts = await _viewContactsUseCase.ExecuteAsync(filterText ?? string.Empty);
 		if (contacts is not null && contacts.Count > 0)
 		{
 			foreach (var contact in contacts)
 			{
-				this.Contacts?.Add(contact);
+				Contacts?.Add(contact);
 			}
 		}
 	}
 
 	[RelayCommand]
-	public async Task DeleteContact(int contactId)
+	public async Task DeleteContactAsync(int contactId)
 	{
 		await _deleteContactUseCase.ExecuteAsync(contactId);
-		await LoadContactsAsync();
+		await LoadContactsAsync(FilterText);
 	}
 
 	[RelayCommand]
-	public async Task GoToEditContact(int contactId)
+	public async Task GoToEditContactAsync(int contactId)
 	{
 		await Shell.Current.GoToAsync($"{nameof(EditContact_MVVM_Page)}?Id={contactId}");
 		await LoadContactsAsync();
 	}
 
 	[RelayCommand]
-	public async Task GoToAddContact()
+	public async Task GoToAddContactAsync()
 	{
 		await Shell.Current.GoToAsync($"{nameof(AddContact_MVVM_Page)}");
 	}
