@@ -22,6 +22,10 @@ public partial class ContactViewModel : ObservableObject
 		}
 	}
 
+	public bool IsNameProvided { get; set; }
+	public bool IsEmailProvided { get; set; }
+	public bool IsEmailFormatValid { get; set; }
+
 	public ContactViewModel(
 		IViewContactUseCase viewContactUseCase,
 		IEditContactUseCase editContactUseCase,
@@ -41,28 +45,62 @@ public partial class ContactViewModel : ObservableObject
 	[RelayCommand]
 	public async Task EditContact()
 	{
-		if (this.Contact is not null)
+		if (await ValidateContact())
 		{
-			await _editContactUseCase.ExecuteAsync(this.Contact.ContactId, this.Contact);
-		}
+			if (this.Contact is not null)
+			{
+				await _editContactUseCase.ExecuteAsync(this.Contact.ContactId, this.Contact);
+			}
 
-		await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
+			await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
+		}
 	}
 
 	[RelayCommand]
 	public async Task AddContact()
 	{
-		if (this.Contact is not null)
+		if (await ValidateContact())
 		{
-			await _addContactUseCase.ExecuteAsync(this.Contact);
-		}
+			if (this.Contact is not null)
+			{
+				await _addContactUseCase.ExecuteAsync(this.Contact);
+			}
 
-		await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
+			await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
+		}
 	}
 
 	[RelayCommand]
 	public async Task BackToContacts()
 	{
 		await Shell.Current.GoToAsync($"{nameof(Contacts_MVVM_Page)}");
+	}
+
+	private async Task<bool> ValidateContact()
+	{
+		if (Application.Current is null || Application.Current.MainPage is null)
+		{
+			return false;
+		}
+
+		if (IsNameProvided is false)
+		{
+			await Application.Current.MainPage.DisplayAlert("Error", "Name is required.", "Ok");
+			return false;
+		}
+
+		if (IsEmailProvided is false)
+		{
+			await Application.Current.MainPage.DisplayAlert("Error", "Email is required.", "Ok");
+			return false;
+		}
+
+		if (IsEmailFormatValid is false)
+		{
+			await Application.Current.MainPage.DisplayAlert("Error", "Email format is incorrect.", "Ok");
+			return false;
+		}
+
+		return true;
 	}
 }
