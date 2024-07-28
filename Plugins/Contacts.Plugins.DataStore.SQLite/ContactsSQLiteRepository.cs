@@ -7,6 +7,7 @@ namespace Contacts.Plugins.DataStore.SQLite;
 public class ContactsSQLiteRepository : IContactRepository
 {
 	private SQLiteAsyncConnection _database;
+
 	public ContactsSQLiteRepository()
 	{
 		_database = new SQLiteAsyncConnection(Constants.DatabasePath);
