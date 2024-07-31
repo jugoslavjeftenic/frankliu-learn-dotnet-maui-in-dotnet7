@@ -1,5 +1,4 @@
 ﻿using Contacts.UseCases.PluginInterfaces;
-using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using Contact = Contacts.CoreBusiness.Contact;

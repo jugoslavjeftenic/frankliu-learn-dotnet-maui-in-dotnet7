@@ -36,13 +36,19 @@ app.MapGet("/api/contacts", async ([FromQuery] string? s, ApplicationDbContext d
 	return Results.Ok(contacts);
 });
 
+app.MapGet("/api/contacts/{id}", (int id, ApplicationDbContext db) =>
+{
+	var contact = db.Contacts.FirstOrDefault(x => x.ContactId.Equals(id));
+	return Results.Ok(contact);
+});
+
 app.MapPost("/api/contacts", async (Contact contact, ApplicationDbContext db) =>
 {
 	db.Contacts.Add(contact);
 	await db.SaveChangesAsync();
 });
 
-app.MapPut("/api/contacts{id}", async (int id, Contact contact, ApplicationDbContext db) =>
+app.MapPut("/api/contacts/{id}", async (int id, Contact contact, ApplicationDbContext db) =>
 {
 	var contactToUpdate = await db.Contacts.FindAsync(id);
 	if (contactToUpdate is null)
@@ -59,7 +65,7 @@ app.MapPut("/api/contacts{id}", async (int id, Contact contact, ApplicationDbCon
 	return Results.NoContent();
 });
 
-app.MapDelete("/api/contacts{id}", async (int id, ApplicationDbContext db) =>
+app.MapDelete("/api/contacts/{id}", async (int id, ApplicationDbContext db) =>
 {
 	var contactToDelete = await db.Contacts.FindAsync(id);
 	if (contactToDelete is not null)
